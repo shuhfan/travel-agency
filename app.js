@@ -3,28 +3,25 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const createError = require('http-errors');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const mongoose = require('./config/db');
+const dotenv = require('dotenv').config();
 
-// Load environment variables from .env file
-dotenv.config();
 
+const userRouter = require('./routes/userRouter');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
-
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
-
 
 // Set view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Middleware
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  next();
+});
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.use('/', indexRouter);
+app.use('/', userRouter);
 app.use('/users', usersRouter);
 
 // Catch 404 and forward to error handler
