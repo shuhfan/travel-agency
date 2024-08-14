@@ -1232,7 +1232,7 @@ header.style-3.four .nav-right .icon-list li {
 }
 
 input[type=email] {
-  direction: rtl;
+  direction: ltr;
 }
 
 .blog-meta ul li {

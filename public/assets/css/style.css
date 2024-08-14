@@ -292,7 +292,7 @@ ul {
 }
 
 .mb-120 {
-  margin-bottom: 120px;
+  margin-bottom: 20px;
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .mb-120 {
@@ -10586,7 +10586,7 @@ header.style-3.four .nav-right .icon-list li:first-child svg {
 ========================================*/
 .home2-banner-area {
   position: relative;
-  padding-bottom: 120px;
+  
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .home2-banner-area {
@@ -10605,7 +10605,7 @@ header.style-3.four .nav-right .icon-list li:first-child svg {
 }
 @media (max-width: 576px) {
   .home2-banner-area {
-    padding-bottom: 370px;
+    padding-bottom: 0;
   }
 }
 .home2-banner-area .home2-banner-wrapper {

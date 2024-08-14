@@ -5,17 +5,21 @@ const logger = require('morgan');
 const createError = require('http-errors');
 const mongoose = require('./config/db');
 const dotenv = require('dotenv').config();
-
+const expressLayouts = require('express-ejs-layouts')
 
 const userRouter = require('./routes/userRouter');
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/userRouter');
 
 const app = express();
 
 // Set view engine
+app.use(expressLayouts)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('layout','../layouts/layout')
+
+
 
 // Middleware
 app.use((req, res, next) => {
@@ -30,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/', userRouter);
-app.use('/users', usersRouter);
+
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
