@@ -10,9 +10,10 @@ user_router.use(session({
 }))
 const auth = require('../middleware/authentication')
 const userController = require('../controllers/userController')
+    
 user_router.set('view engine','ejs')
 user_router.set('views','./views/user')
-
+user_router.set('layout','../layouts/layout')
 
 user_router.get('/',auth.isLogout,userController.loadHome)
 user_router.get('/tours',userController.loadTours)

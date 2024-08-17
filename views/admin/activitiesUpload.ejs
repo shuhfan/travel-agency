@@ -1,0 +1,96 @@
+<%-include('../partials/adminHeader')%>
+        <div class="main-content">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="main-content-title-profile mb-50">
+                        <div class="main-content-title">
+                            <h3>Add New Activities</h3>
+                        </div>
+                    </div>
+                    <div class="dashboard-profile-wrapper two">
+                        <div class="dashboard-profile-tab-content">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-inner mb-30">
+                                            <label>Activities Name</label>
+                                            <input type="text" placeholder="Activities name here...">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-inner mb-30">
+                                            <label>Add Title</label>
+                                            <input type="text" placeholder="Title here...">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-inner mb-30">
+                                            <label>Price</label>
+                                            <input type="text" placeholder="Price here...">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-inner mb-30">
+                                            <label>Discount Price</label>
+                                            <input type="text" placeholder="Discount price here">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-inner mb-30">
+                                            <label>Duration</label>
+                                            <input type="text" readonly name="daterange" placeholder="5 Jan, 2024">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-inner mb-30">
+                                            <label>Number Of People (max)</label>
+                                            <input type="text" placeholder="Number of people here....">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-inner mb-30">
+                                            <label>Location</label>
+                                            <input type="text"  placeholder="Location here...">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="location-map mb-30">
+                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3649.5647631857846!2d90.36311167605992!3d23.83407118555764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c14c8682a473%3A0xa6c74743d52adb88!2sEgens%20Lab!5e0!3m2!1sen!2sbd!4v1694943917248!5m2!1sen!2sbd" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-30">
+                                        <div class="form-inner">
+                                            <label>Description</label>
+                                            <textarea placeholder="Description here"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="upload-img-area">
+                                    <div class="upload-img-wrapper">
+                                        <div class="drag-area">
+                                            <button type="button" class="upload-btn"><i class="bi bi-plus-lg"></i></button>
+                                            <input type="file" hidden="">
+                                        </div>
+                                    </div>
+                                    <div class="upload-img-area-content">
+                                        <h6>Upload Your Image</h6>
+                                        <p>Image required size 300*300, JPGE or PNG format.</p>
+                                    </div>
+                                </div>
+                                <div class="form-inner mb-50">
+                                    <label class="containerss">
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                        <span class="text">Update details in all properties included in this site.</span>
+                                    </label>
+                                </div>
+                                <div class="form-inner">
+                                    <button type="submit" class="primary-btn3">Publish Now</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%-include('../partials/adminFooter')%>
