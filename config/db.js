@@ -1,8 +1,8 @@
 // db.js
 const mongoose = require('mongoose');
-const env = require('dotenv')
+const env = require('dotenv').config();
 
-const dbURI = process.env.DB_URL || 'mongodb://127.0.0.1:27017/travel-agency';
+const dbURI = process.env.DB_URL;
 
 // Set up a database connection
 mongoose.connect(dbURI);

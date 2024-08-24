@@ -1,5 +1,6 @@
 const express = require('express')
 const admin_router = express()
+const upload = require('../multer/multer')
 const session = require('express-session')
 const config = require('../config/session')
 admin_router.use(session({
@@ -32,5 +33,10 @@ admin_router.get('/all-transports',adminController.loadAllTransports)
 admin_router.get('/booking-list',adminController.loadBookingList)
 admin_router.get('/customer-list',adminController.loadCustomerList)
 admin_router.get('/settings',adminController.loadSettings)
+
+
+admin_router.post('/tour-upload', upload.array('images', 12), adminController.addTour);
+admin_router.post('/hotel-upload', upload.array('images', 12), adminController.addHotel);
+
 
 module.exports=admin_router

@@ -25,7 +25,7 @@ user_router.get('/contact',userController.loadContact)
 user_router.get('/about',userController.loadAbout)
 user_router.get('/login',auth.isLogout,userController.loadLogin)
 user_router.get('/signup',userController.loadSignup)
-user_router.get('/package-details',userController.loadPackageDetails)
+user_router.get('/package-details/:id',userController.loadPackageDetails)
 user_router.get('/hotel-details',userController.loadHotelDetails)
 user_router.get('/transport-details',userController.loadTransportDetails)
 user_router.get('/activities-details',userController.loadActivitiesDetails)
@@ -36,5 +36,5 @@ user_router.get('/logout',auth.isLogin,userController.logout)
 user_router.post('/signup',userController.signup)
 user_router.post('/login',userController.login)
 
-
+user_router.post('/create_order',userController.createRzpOrder) 
 module.exports = user_router

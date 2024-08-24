@@ -1,92 +1,87 @@
-
-
-
-    <%-include('../partials/adminHeader')%>
-        <div class="main-content">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="main-content-title-profile mb-50">
-                        <div class="main-content-title">
-                            <h3>Add New Tour Package</h3>
-                        </div>
+<%-include('../partials/adminHeader')%>
+    <div class="main-content">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="main-content-title-profile mb-50">
+                    <div class="main-content-title">
+                        <h3>Add New Tour Package</h3>
                     </div>
-                    <div class="dashboard-profile-wrapper two">
-                        <div class="dashboard-profile-tab-content">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-inner mb-30">
-                                            <label>Add Title</label>
-                                            <input type="text" placeholder="Title here...">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-inner mb-30">
-                                            <label>Price</label>
-                                            <input type="text" placeholder="Price here...">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-inner mb-30">
-                                            <label>Discount Price</label>
-                                            <input type="text" placeholder="Discount price here">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-inner mb-30">
-                                            <label>Duration</label>
-                                            <input type="text" readonly name="daterange" placeholder="5 Jan, 2024">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-inner mb-30">
-                                            <label>Number Of People (max)</label>
-                                            <input type="text" placeholder="Number of people here....">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-30">
-                                        <div class="form-inner">
-                                            <label>Destination</label>
-                                            <select>
-                                                <option>United Kingdom</option>
-                                                <option>Bangladesh</option>
-                                                <option>United State</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 mb-30">
-                                        <div class="form-inner">
-                                            <label>Description</label>
-                                            <textarea placeholder="Description here"></textarea>
-                                        </div>
+                </div>
+                <div class="dashboard-profile-wrapper two">
+                    <div class="dashboard-profile-tab-content">
+                        <form action="/admin/tour-upload" method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-inner mb-30">
+                                        <label>Add Title</label>
+                                        <input type="text" name="title" placeholder="Title here..." required>
                                     </div>
                                 </div>
-                                <div class="upload-img-area">
-                                    <div class="upload-img-wrapper">
-                                        <div class="drag-area">
-                                            <button type="button" class="upload-btn"><i class="bi bi-plus-lg"></i></button>
-                                            <input type="file" hidden="">
-                                        </div>
-                                    </div>
-                                    <div class="upload-img-area-content">
-                                        <h6>Upload Your Image</h6>
-                                        <p>Image required size 300*300, JPGE or PNG format.</p>
+                                <div class="col-md-6">
+                                    <div class="form-inner mb-30">
+                                        <label>Price</label>
+                                        <input type="number" name="price" placeholder="Price here..." required>
                                     </div>
                                 </div>
-                                <div class="form-inner mb-50">
-                                    <label class="containerss">
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                        <span class="text">Update details in all properties included in this site.</span>
-                                    </label>
+                                <div class="col-md-6">
+                                    <div class="form-inner mb-30">
+                                        <label>Discount Price</label>
+                                        <input type="number" name="discountPrice" placeholder="Discount price here"
+                                            required>
+                                    </div>
                                 </div>
-                                <div class="form-inner">
-                                    <button type="submit" class="primary-btn3">Publish Now</button>
+                                <div class="col-md-6">
+                                    <div class="form-inner mb-30">
+                                        <label>Duration</label>
+                                        <input type="number" name="duration" required placeholder="Number of Days">
+                                    </div>
                                 </div>
-                            </form>
-                        </div>
+                                <div class="col-md-6">
+                                    <div class="form-inner mb-30">
+                                        <label>Number Of People (max)</label>
+                                        <input type="number" name="maxPeople" placeholder="Number of people here...."
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-30">
+                                    <div class="form-inner">
+                                        <label>Destination</label>
+                                        <input type="text" name="destination" placeholder="eg: Italy & France."
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-30">
+                                    <div class="form-inner">
+                                        <label>Description</label>
+                                        <textarea name="description" placeholder="Description here"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="upload-img-area">
+                                <div class="upload-img-wrapper ">
+                                    <div >
+                                        <input type="file" multiple name="images" required>
+                                    </div>
+                                </div>
+                                <div class="upload-img-area-content">
+                                    <h6>Upload Your Image</h6>
+                                    <p>Image required size 300*300, JPGE or PNG format.</p>
+                                </div>
+                            </div>
+                            <div class="form-inner mb-50">
+                                <label class="containerss">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    <span class="text">Update details in all properties included in this site.</span>
+                                </label>
+                            </div>
+                            <div class="form-inner">
+                                <button type="submit" class="primary-btn3">Publish Now</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <%-include('../partials/adminFooter')%>
+    </div>
+    <%-include('../partials/adminFooter')%>

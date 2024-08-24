@@ -7075,6 +7075,11 @@ header.style-3.four .nav-right .icon-list li:first-child svg {
   position: relative;
   transition: all 0.5s ease-out;
 }
+.package-card-img-wrap img {
+  width: 100%; /* Make the image take full width */
+  height: 200px; /* Set a fixed height for all images */
+  object-fit: cover; /* Maintain aspect ratio and cover the area */
+}
 .package-card .package-card-img-wrap .card-img {
   position: relative;
   overflow: hidden;
@@ -22390,6 +22395,7 @@ header.style-3.four .nav-right .icon-list li:first-child svg {
 
 .destination-gallery .gallery-img-wrap {
   position: relative;
+  overflow: hidden;
   transition: all 0.45s;
   height: 100%;
 }

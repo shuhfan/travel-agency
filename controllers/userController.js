@@ -1,5 +1,12 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
+const Tour = require('../models/tour');
+const Booking = require('../models/tourBook')
+const Razorpay = require('razorpay');
+const razorpay = new Razorpay({
+    key_id: 'YOUR_RAZORPAY_KEY',
+    key_secret: 'YOUR_RAZORPAY_SECRET'
+});
 
 const loadHome = async (req,res,next)=>{
     try {
@@ -10,7 +17,8 @@ const loadHome = async (req,res,next)=>{
 }
 const loadTours = async(req,res,next)=>{
     try {
-        res.render('tours')
+        const tours = await Tour.find();
+        res.render('tours',{ tours })
     } catch (error) {
         console.log(error.message)
     }
@@ -80,9 +88,16 @@ const loadSignup = async(req,res,next)=>{
 }
 const loadPackageDetails = async(req,res,next)=>{
     try {
-        res.render('package-details')
+        const tour = await Tour.findById(req.params.id);
+        const user = await User.findById(req.session.user_id);
+        if (!tour) {
+            return res.status(404).send('Tour not found');
+        }
+        res.render('package-details',{tour,user})
+        
     } catch (error) {
         console.log(error.message);
+
         
     }
 }
@@ -170,6 +185,25 @@ const logout = async (req,res,next)=>{
         
     }
 }
+const createRzpOrder = async(req,res,next)=>{
+    const { paymentId, quantity, startDate, endDate, totalAmount } = req.body;
+
+    // Store booking details in the database
+    const newBooking = new Booking({
+        paymentId,
+        quantity,
+        startDate,
+        endDate,
+        totalAmount
+    });
+
+    try {
+        await newBooking.save();
+        res.status(200).json({ message: 'Booking successful!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error saving booking: ' + error.message });
+    }
+}
 
 module.exports={loadHome,
     loadTours,
@@ -189,5 +223,6 @@ module.exports={loadHome,
     loadDashboard,
     login,
     signup,
-    logout
+    logout,
+    createRzpOrder
 }

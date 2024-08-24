@@ -1,3 +1,9 @@
+
+
+const Tour = require('../models/tour')
+const Hotel = require('../models/hotels')
+
+
 const loadLogin = async(req,res,next)=>{
     try {
         res.render('login')
@@ -24,7 +30,8 @@ const loadTourUpload = async(req,res,next)=>{
 }
 const loadAllTours = async (req,res,next)=>{
     try {
-        res.render('allTour')
+        const tours = await Tour.find();
+        res.render('allTour',{ tours })
     } catch (error) {
         console.log(error.message);
         
@@ -118,6 +125,67 @@ const loadSettings = async(req,res,next)=>{
         
     }
 }
+const addTour = async (req, res) => {
+    try {
+        const { title, price, discountPrice, duration, maxPeople, destination, description } = req.body;
+
+        // Check if files were uploaded
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).json({ error: 'No files were uploaded.' });
+        }
+
+        // Get the uploaded image paths
+        const images = req.files.map(file => `/uploads/${file.filename}`);
+
+        // Create a new tour instance
+        const newTour = new Tour({
+            title,
+            price,
+            discountPrice,
+            duration,
+            maxPeople,
+            destination,
+            description,
+            images
+        });
+
+        // Save the tour to the database
+        await newTour.save();
+
+        // Redirect or send a success response
+        res.redirect('/admin/tour-upload'); // Redirect to the admin dashboard or another page
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error adding tour package');
+    }
+};
+
+const addHotel = async (req, res) => {
+    const { title, roomType, price, discountPrice, facilities, numberOfPeople, location, description } = req.body;
+    const image = req.file ? req.file.path : ''; // Get the uploaded image path
+
+    const newBooking = new Hotel({
+        title,
+        roomType,
+        price,
+        discountPrice,
+        facilities,
+        numberOfPeople,
+        location,
+        description,
+        image
+    });
+
+    try {
+        await newBooking.save();
+        res.redirect('/admin/hotel-upload'); // Redirect to the admin dashboard or another page
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error adding tour package');
+    }
+};
+
+
 module.exports = {
     loadLogin,
     loadDashboard,
@@ -134,4 +202,6 @@ module.exports = {
     loadBookingList,
     loadCustomerList,
     loadSettings,
+    addTour,
+    addHotel,
 }

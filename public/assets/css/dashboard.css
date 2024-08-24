@@ -1655,7 +1655,7 @@ ul {
   margin-bottom: 0;
 }
 .dashboard-wrapper .main-content .dashboard-profile-wrapper .dashboard-profile-tab-content .upload-img-area {
-  display: flex;
+  
   align-items: center;
   gap: 15px;
   margin-bottom: 30px;

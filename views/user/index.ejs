@@ -1833,5 +1833,26 @@
     <!-- End Home2 newsletter section -->
 
     
+    <script>
+        const txts = document.querySelector(".animate-text").children,
+            txtslen = txts.length;
+        let index = 0;
 
+        function animateText() {
+            console.log(txts[index]);
+            for (let i = 0; i < txtslen; i++) {
+                txts[i].classList.remove("text-in");
+            }
+            txts[index].classList.add("text-in");
+            if (index == txtslen - 1) {
+                index = 0;
+            }
+            else {
+                index++;
+            }
+
+            setTimeout(animateText, 3000);
+        }
+        window.onload = animateText;
+    </script>
     <%-include('../partials/userFooter')%>  
