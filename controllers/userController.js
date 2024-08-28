@@ -1,8 +1,11 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
 const Tour = require('../models/tour');
+const Hotel = require('../models/hotels')
 const Booking = require('../models/tourBook')
 const Razorpay = require('razorpay');
+const Visa = require('../models/visa');
+const Activity = require('../models/activity')
 const razorpay = new Razorpay({
     key_id: 'YOUR_RAZORPAY_KEY',
     key_secret: 'YOUR_RAZORPAY_SECRET'
@@ -25,7 +28,8 @@ const loadTours = async(req,res,next)=>{
 }
 const loadHotels = async(req,res,next)=>{
     try {
-        res.render('hotels')
+        const hotels = await Hotel.find()
+        res.render('hotels',{hotels})
     } catch (error) {
         console.log(error.message)
     }
@@ -40,7 +44,8 @@ const loadTransports =async(req,res,next)=>{
 }
 const loadActivities = async(req,res,next)=>{
     try {
-        res.render('activities')
+        const activities = await Activity.find()
+        res.render('activities',{activities})
     } catch (error) {
         console.log(error.message);
         
@@ -48,7 +53,8 @@ const loadActivities = async(req,res,next)=>{
 }
 const loadVisa = async(req,res,next)=>{
     try {
-        res.render('visa')
+        const visas = await Visa.find()
+        res.render('visa',{visas})
     } catch (error) {
         console.log(error.message);
         
@@ -103,7 +109,10 @@ const loadPackageDetails = async(req,res,next)=>{
 }
 const loadHotelDetails = async(req,res,next)=>{
     try {
-        res.render('hotel-details')
+        const hotel = await Hotel.findById(req.params.id)
+        const user = await User.findById(req.session.user_id);
+
+        res.render('hotel-details',{hotel,user})
     } catch (error) {
         console.log(error.message);
         
@@ -119,7 +128,9 @@ const loadTransportDetails = async(req,res,next)=>{
 }
 const loadActivitiesDetails = async(req,res,next)=>{
     try {
-        res.render('activities-details')
+        const activity = await Activity.findById(req.params.id)
+        const user = await User.findById(req.session.user_id);
+        res.render('activities-details',{activity,user})
     } catch (error) {
         console.log(error.message);
         
@@ -127,7 +138,9 @@ const loadActivitiesDetails = async(req,res,next)=>{
 }
 const loadVisaDetails = async(req,res,next)=>{
     try{
-        res.render('visa-details')
+        const visa = await Visa.findById(req.params.id)
+        const user = await User.findById(req.session.user_id);
+        res.render('visa-details',{visa,user})
     } catch (error) {
         console.log(error.message);
     }
@@ -142,10 +155,17 @@ const loadDashboard = async(req,res,next)=>{
     }
 }
 const signup = async (req, res) => {
-    const { username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
+    const { username, email, mobile, password } = req.body;
     try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).send('Email already in use');
+        }
+        
+        const hashedPassword = await bcrypt.hash(password, 10);
+    
+        const newUser = new User({ username, email, mobile, password: hashedPassword });
+        
         await newUser.save();
         res.redirect('/login'); // Redirect to login page after successful registration
     } catch (error) {
@@ -153,7 +173,8 @@ const signup = async (req, res) => {
         res.status(500).send('Error registering user');
     }
 };
-const login = async (req, res) => {
+
+const login = async (req, res,next) => {
     const { email, password } = req.body;
     try {
         const user = await User.findOne({ email });
@@ -165,6 +186,7 @@ const login = async (req, res) => {
             return res.status(400).send('Invalid credentials');
         }
         req.session.user_id = user._id;
+        next();
         res.redirect('/dashboard'); // Redirect to dashbord page after successful login
     } catch (error) {
         console.error(error);

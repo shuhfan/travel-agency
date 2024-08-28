@@ -4,15 +4,7 @@
                 <div class="col-xl-12">
                     <div class="main-content-title-profile mb-50">
                         <div class="main-content-title">
-                            <h3>All Hotel</h3>
-                        </div>
-                        <div class="profile">
-                            <a href="#">
-                                View Profile
-                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8">
-                                    <path d="M6.669 2.27202L0.94102 8L0 7.05898L5.72731 1.331H0.679478V0H8V7.32052H6.669V2.27202Z" />
-                                </svg>
-                            </a>
+                            <h3>All Hotels</h3>
                         </div>
                     </div>
                     <div class="counter-area">
@@ -111,139 +103,39 @@
                                         <th>Price</th>
                                         <th>Room Type</th>
                                         <th>Person</th>
-                                        <th>Status</th>
-                                        <th>Execution Time</th>
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td data-label="Tour Package">
-                                            <div class="product-name">
-                                                <div class="img">
-                                                    <img src="assets/img/innerpage/room-img-02.jpg" alt="">
+                                    <% hotels.forEach(hotel => { %>
+                                        <tr>
+                                            <td data-label="Tour Package">
+                                                <div class="product-name">
+                                                    <div class="img">
+                                                        <img src="<%= hotel.images[0] %>" alt="">
+                                                    </div>
+                                                    <div class="product-content">
+                                                        <h6><a href="/admin/hotel-details/<%= hotel._id %>"><%= hotel.title %></a></h6>
+                                                        <p>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                                                <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
+                                                            </svg> <span><%= hotel.location %></span>
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div class="product-content">
-                                                    <h6><a href="hotel-details.html">Hotel Windy Terrace</a></h6>
-                                                    <p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                                            <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
-                                                        </svg> <span>St. Louis, USA</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td data-label="Price">
-                                            $720.00/night
-                                        </td>
-                                        <td data-label="Room Type">
-                                            Classic Room
-                                        </td>
-                                        <td data-label="Person">
-                                            4 person
-                                        </td>
-                                        <td data-label="Status">
-                                          <span class="confirmed"> Booked</span>
-                                        </td>
-                                        <td data-label="Execution Time">
-                                            July 10, 2023 - July 14, 2023
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Tour Package">
-                                            <div class="product-name">
-                                                <div class="img">
-                                                    <img src="assets/img/innerpage/room-img-01.jpg" alt="">
-                                                </div>
-                                                <div class="product-content">
-                                                    <h6><a href="hotel-details.html">Golden Tulip The Grandmark Dhaka</a></h6>
-                                                    <p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                                            <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
-                                                        </svg> <span>Liverpool, UK</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td data-label="Price">
-                                            $1320.00/night
-                                        </td>
-                                        <td data-label="Room Type">
-                                            Classic Room
-                                        </td>
-                                        <td data-label="Person">
-                                            3 person
-                                        </td>
-                                        <td data-label="Status">
-                                          <span class="pending"> Pending</span>
-                                        </td>
-                                        <td data-label="Execution Time">
-                                            July 10, 2023 - July 14, 2023
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Tour Package">
-                                            <div class="product-name">
-                                                <div class="img">
-                                                    <img src="assets/img/innerpage/room-img-03.jpg" alt="">
-                                                </div>
-                                                <div class="product-content">
-                                                    <h6><a href="hotel-details.html">Harmony Haven Hideaway</a></h6>
-                                                    <p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                                            <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
-                                                        </svg> <span>Berlin, germany</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td data-label="Price">
-                                            $3200.00/night
-                                        </td>
-                                        <td data-label="Room Type">
-                                            Executive Suite
-                                        </td>
-                                        <td data-label="Person">
-                                            4 person
-                                        </td>
-                                        <td data-label="Status">
-                                          <span class="confirmed"> Booked</span>
-                                        </td>
-                                        <td data-label="Execution Time">
-                                            July 10, 2023 - July 14, 2023
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Tour Package">
-                                            <div class="product-name">
-                                                <div class="img">
-                                                    <img src="assets/img/innerpage/room-img-04.jpg" alt="">
-                                                </div>
-                                                <div class="product-content">
-                                                    <h6><a href="hotel-details.html">Tranquil Twilight Lodge</a></h6>
-                                                    <p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                                            <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
-                                                        </svg> <span>Dhaka, Bangladesh</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td data-label="Price">
-                                            $1750.00/night
-                                        </td>
-                                        <td data-label="Room Type">
-                                            Classic Room
-                                        </td>
-                                        <td data-label="Person">
-                                            2 person
-                                        </td>
-                                        <td data-label="Status">
-                                          <span class="rejected"> Cancelled</span>
-                                        </td>
-                                        <td data-label="Execution Time">
-                                            July 10, 2023 - July 14, 2023
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td data-label="Price">
+                                                <%= hotel.price %>
+                                            </td>
+                                            <td data-label="Room Type">
+                                                <%= hotel.roomType %>
+                                            </td>
+                                            <td data-label="Person">
+                                                <%= hotel.numberOfPeople %>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                    
                                 </tbody>
                             </table>
                             <div class="pagination-area">

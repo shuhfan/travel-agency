@@ -110,172 +110,45 @@
                                         <th>Visa Name</th>
                                         <th>Visa Type</th>
                                         <th>Visa Mode</th>
-                                        <th>Visa Status</th>
+                                        
                                         <th>Validity</th>
                                         <th>Processing Time</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td data-label="Visa Name">
-                                            <div class="product-name">
-                                                <div class="img">
-                                                    <img src="assets/img/home4/package-card4-img1.jpg" alt="">
+                                    <% visas.forEach(visa => { %>
+                                        <tr>
+                                            <td data-label="Visa Name">
+                                                <div class="product-name">
+                                                    <div class="img">
+                                                        <img src="<%= visa.images[0] %>" alt="">
+                                                    </div>
+                                                    <div class="product-content">
+                                                        <h6><a href="/visa-details/<%= visa._id %>"><%= visa.title %></a></h6>
+                                                        <p>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                                                <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
+                                                            </svg> 
+                                                            <span><%= visa.location %></span>
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div class="product-content">
-                                                    <h6><a href="visa-details.html">Electronic Visa Adult With Fan With Insurance.</a></h6>
-                                                    <p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                                            <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
-                                                        </svg> <span>USA</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td data-label="Visa Type">
-                                            Tourist
-                                        </td>
-                                        <td data-label="Visa Mode">
-                                            Electronic
-                                        </td>
-                                        <td data-label="Visa Status">
-                                          <span class="confirmed"> Approved</span>
-                                        </td>
-                                        <td data-label="Validity">
-                                            6 months
-                                        </td>
-                                        <td data-label="Processing Time">
-                                            60 days
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Visa Name">
-                                            <div class="product-name">
-                                                <div class="img">
-                                                    <img src="assets/img/home4/package-card4-img2.jpg" alt="">
-                                                </div>
-                                                <div class="product-content">
-                                                    <h6><a href="visa-details.html">Grown-Up E-Visa With Cooling And Assurance</a></h6>
-                                                    <p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                                            <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
-                                                        </svg> <span>Egypt</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td data-label="Visa Type">
-                                            Tourist
-                                        </td>
-                                        <td data-label="Visa Mode">
-                                            Electronic
-                                        </td>
-                                        <td data-label="Visa Status">
-                                          <span class="pending"> Pending</span>
-                                        </td>
-                                        <td data-label="Validity">
-                                            12 months
-                                        </td>
-                                        <td data-label="Processing Time">
-                                            30 days
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Visa Name">
-                                            <div class="product-name">
-                                                <div class="img">
-                                                    <img src="assets/img/innerpage/visa-package-img1.jpg" alt="">
-                                                </div>
-                                                <div class="product-content">
-                                                    <h6><a href="visa-details.html">Digital Visa For Adults With Admirer And Insurance</a></h6>
-                                                    <p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                                            <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
-                                                        </svg> <span>Australia</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td data-label="Visa Type">
-                                            Tourist
-                                        </td>
-                                        <td data-label="Visa Mode">
-                                            Electronic
-                                        </td>
-                                        <td data-label="Visa Status">
-                                          <span class="rejected"> Denied</span>
-                                        </td>
-                                        <td data-label="Validity">
-                                            6 months
-                                        </td>
-                                        <td data-label="Processing Time">
-                                            60 days
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Visa Name">
-                                            <div class="product-name">
-                                                <div class="img">
-                                                    <img src="assets/img/innerpage/visa-package-img2.jpg" alt="">
-                                                </div>
-                                                <div class="product-content">
-                                                    <h6><a href="visa-details.html">E-Visa For Grown-Ups With Devotee And Assurance</a></h6>
-                                                    <p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                                            <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
-                                                        </svg> <span>Turkey</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td data-label="Visa Type">
-                                            Tourist
-                                        </td>
-                                        <td data-label="Visa Mode">
-                                            Electronic
-                                        </td>
-                                        <td data-label="Visa Status">
-                                          <span class="confirmed"> Approved</span>
-                                        </td>
-                                        <td data-label="Validity">
-                                            6 months
-                                        </td>
-                                        <td data-label="Processing Time">
-                                            60 days
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Visa Name">
-                                            <div class="product-name">
-                                                <div class="img">
-                                                    <img src="assets/img/innerpage/visa-package-img4.jpg" alt="">
-                                                </div>
-                                                <div class="product-content">
-                                                    <h6><a href="visa-details.html">Virtual Visa For Adults With Supporter And Protection</a></h6>
-                                                    <p>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                                            <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
-                                                        </svg> <span>India</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td data-label="Visa Type">
-                                            Tourist
-                                        </td>
-                                        <td data-label="Visa Mode">
-                                            Electronic
-                                        </td>
-                                        <td data-label="Visa Status">
-                                          <span class="confirmed"> Approved</span>
-                                        </td>
-                                        <td data-label="Validity">
-                                            6 months
-                                        </td>
-                                        <td data-label="Processing Time">
-                                            60 days
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td data-label="Visa Type">
+                                                <%= visa.visaType %>
+                                            </td>
+                                            <td data-label="Visa Mode">
+                                                <%= visa.visaMode %>
+                                            </td>
+                                            <td data-label="Validity">
+                                                <%= visa.validity %>
+                                            </td>
+                                            <td data-label="Processing Time">
+                                                <%= visa.processingTime %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                    
                                 </tbody>
                             </table>
                             <div class="pagination-area">

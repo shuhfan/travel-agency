@@ -1,8 +1,51 @@
-
+const bcrypt = require('bcryptjs');
 
 const Tour = require('../models/tour')
 const Hotel = require('../models/hotels')
+const Visa = require('../models/visa')
+const Activity = require('../models/activity')
+const Transport = require('../models/transport')
+const User = require('../models/userModel')
 
+const login = async (req, res, next) => {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).send('User not found');
+        }
+        
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).send('Invalid credentials');
+        }
+
+        if (!user.isAdmin) {
+            return res.status(403).send('Access denied: Not an admin');
+        }
+
+        req.session.admin_id = user._id;
+        res.redirect('/admin/dashboard'); 
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error logging in');
+    }
+};
+
+const logout = async (req,res,next)=>{
+    try {
+        req.session.destroy((err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).send('Error logging out');
+            }
+                res.redirect('/');
+        });
+    } catch (error) {
+        console.log(error.message);
+        
+    }
+}
 
 const loadLogin = async(req,res,next)=>{
     try {
@@ -47,7 +90,8 @@ const loadHotelUpload = async(req,res,next)=>{
 }
 const loadAllHotels = async(req,res,next)=>{
     try {
-        res.render('allHotels')
+        const hotels = await Hotel.find()
+        res.render('allHotels',{hotels})
     } catch (error) {
         console.log(error.message);
         
@@ -63,7 +107,8 @@ const loadVisaUpload = async(req,res,next)=>{
 }
 const loadAllVisa = async(req,res,next)=>{
     try {
-        res.render('allVisa')
+        const visas = await Visa.find()
+        res.render('allVisa',{visas})
     } catch (error) {
         console.log(error.message);
         
@@ -79,7 +124,8 @@ const loadActivitiesUpload = async(req,res,next)=>{
 }
 const loadAllActivities = async(req,res,next)=>{
     try {
-        res.render('allActivities')
+        const activities = await Activity.find()
+    res.render('allActivities',{activities})
     } catch (error) {
         console.log(error.message);
         
@@ -162,31 +208,115 @@ const addTour = async (req, res) => {
 
 const addHotel = async (req, res) => {
     const { title, roomType, price, discountPrice, facilities, numberOfPeople, location, description } = req.body;
-    const image = req.file ? req.file.path : ''; // Get the uploaded image path
 
-    const newBooking = new Hotel({
+    // Handle multiple images
+    const images = req.files.map(file => `/uploads/${file.filename}`);
+
+    // Split facilities into an array
+    const facilitiesArray = facilities.split(',').map(facility => facility.trim());
+
+    // Create a new hotel instance
+    const newHotel = new Hotel({
         title,
         roomType,
         price,
         discountPrice,
-        facilities,
+        facilities: facilitiesArray,
         numberOfPeople,
         location,
         description,
-        image
+        images
     });
 
     try {
-        await newBooking.save();
+        await newHotel.save();
         res.redirect('/admin/hotel-upload'); // Redirect to the admin dashboard or another page
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error adding tour package');
+        res.status(500).send('Error adding hotel');
     }
 };
 
+const addVisa = async (req, res) => {
+    try {
+        const { title, visaType, visaMode, validity, processingTime, price, location, description } = req.body;
+        const images = req.files.map(file => `/uploads/${file.filename}`);
+
+        // Create new Visa document
+        const newVisa = new Visa({
+            title,
+            visaType,
+            visaMode,
+            validity,
+            processingTime,
+            price,
+            location,
+            description,
+            images
+        });
+
+        await newVisa.save();
+        res.redirect('/admin/visa-upload'); 
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error uploading visa details');
+    }
+};
+
+const addActivity =  async (req, res) => {
+    try {
+        const { activityName, title, price, discountPrice, duration, numberOfPeople, location, description } = req.body;
+        const images = req.files.map(file => `/uploads/${file.filename}`);
+
+        const newActivity = new Activity({
+            activityName,
+            title,
+            price,
+            discountPrice,
+            duration,
+            numberOfPeople,
+            location,
+            description,
+            images
+        });
+
+        await newActivity.save();
+
+        res.redirect('/admin/activities-upload'); // Redirect after successful submission
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+}
+
+const addTransport = async (req, res) => {
+    const { transportName, type, price, discountPrice, duration, numberOfPeople, location, description } = req.body;
+    const images = req.files.map(file => `/uploads/${file.filename}`);
+
+    const newTransport = new Transport({
+        transportName,
+        type,
+        price,
+        discountPrice,
+        duration,
+        numberOfPeople,
+        location,
+        description,
+        images
+    });
+
+    try {
+        await newTransport.save();
+        res.redirect('/admin/transport-upload'); 
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error saving transport data');
+    }
+}
 
 module.exports = {
+    login,
+    logout,
     loadLogin,
     loadDashboard,
     loadTourUpload,
@@ -204,4 +334,7 @@ module.exports = {
     loadSettings,
     addTour,
     addHotel,
+    addVisa,
+    addActivity,
+    addTransport
 }
