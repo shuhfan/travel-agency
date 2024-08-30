@@ -226,6 +226,23 @@ const createRzpOrder = async(req,res,next)=>{
         res.status(500).json({ message: 'Error saving booking: ' + error.message });
     }
 }
+const loadTermsCondition = async(req,res)=>{
+    try {
+        res.render('TermsCondition')
+    } catch (error) {
+        console.log(error.message);
+        
+    }
+}
+const loadPrivacyPolicy = async(req,res)=>{
+    try {
+        res.render('privacyPolicy')
+    } catch (error) {
+        console.log(error.message);
+        
+    }
+}
+
 
 module.exports={loadHome,
     loadTours,
@@ -246,5 +263,7 @@ module.exports={loadHome,
     login,
     signup,
     logout,
-    createRzpOrder
+    createRzpOrder,
+    loadTermsCondition,
+    loadPrivacyPolicy,
 }
