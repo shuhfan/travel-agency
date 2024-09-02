@@ -26678,6 +26678,9 @@ header.style-3.four .nav-right .icon-list li:first-child svg {
 .transport-card .transport-img {
   display: block;
   border-radius: 5px 5px 0 0;
+  width: 100%; /* Container takes 100% width */
+    height: 200px; /* Set a fixed height for all images */
+    overflow: hidden; 
   position: relative;
 }
 .transport-card .transport-img span {
@@ -26699,6 +26702,13 @@ header.style-3.four .nav-right .icon-list li:first-child svg {
 }
 .transport-card .transport-img img {
   border-radius: 5px 5px 0 0;
+  width: 100%; /* Image takes full width of the container */
+    height: 100%; /* Image takes full height of the container */
+    object-fit: cover; /* Maintain aspect ratio and crop the image to fit */
+    display: block; /* Removes any extra space below the image */
+    position: absolute; /* Position image to fill container */
+    top: 0;
+    left: 0;
 }
 .transport-card .transport-img::after {
   content: "";

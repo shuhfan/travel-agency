@@ -7,171 +7,56 @@
                             <h3>Customer List</h3>
                         </div>
                         <div class="search-area">
-                            <form>
+                            <form action="/admin/customer-list" method="GET">
                                 <div class="search-box">
-                                    <input type="text" placeholder="Search Here">
+                                    <input type="text" name="search" placeholder="Search Here">
                                     <button type="submit"><i class="bx bx-search"></i></button>
                                 </div>
                             </form>
+                            
                         </div>
                     </div>
                     <div class="row">
-                        <div class=" col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                            <div class="eg-profile-card text-center">
-                                <div class="profile-img">
-                                    <img class="rounded-circle" src="assets/img/innerpage/profile-img.png" alt="">
-                                    <button class="eg-btn green-light--btn">Active</button>
-                                </div>
-                                <div class="profile-bio">
-                                    <h4>Zephyr Crestwood</h4>
-                                    <h6>Marchant ID: 120002</h6>
-                                </div>
-                                <div class="card-action d-flex justify-content-between">
-                                    <div class="d-flex flex-row justify-content-md-center justify-content-end align-items-center gap-2">
-                                        <button class="eg-btn add--btn"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="eg-btn delete--btn"><i class="bi bi-trash"></i></button>
-                                        <button class="eg-btn account--btn"><i class="far fa-user"></i></button>
+                        <% users.forEach(user => { %>
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                                <div class="eg-profile-card text-center">
+                                    <div class="profile-img">
+                                        <img class="rounded-circle" src="/assets/img/innerpage/profile-img.png" alt="Profile Image">
+                                        <button class="eg-btn green-light--btn"><%= user.isAdmin ? 'Admin' : 'Active' %></button> <!-- Example of condition -->
                                     </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <div class="profile-bio">
+                                        <h4><%= user.username %></h4> <!-- Display username -->
+                                        <h6>User ID: <%= user._id %></h6> <!-- Display user ID -->
+                                        <p>Email: <%= user.email %></p> <!-- Display user email -->
+                                        <p>Mobile: <%= user.mobile %></p> <!-- Display user mobile -->
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                            <div class="eg-profile-card text-center">
-                                <div class="profile-img">
-                                    <img class="rounded-circle" src="assets/img/innerpage/profile-img.png" alt="">
-                                    <button class="eg-btn green-light--btn">Active</button>
-                                </div>
-                                <div class="profile-bio">
-                                    <h4>Seraphina Nightingale</h4>
-                                    <h6>Marchant ID: 120003</h6>
-                                </div>
-                                <div class="card-action d-flex justify-content-between">
-                                    <div class="d-flex flex-row justify-content-md-center justify-content-end align-items-center gap-2">
-                                        <button class="eg-btn add--btn"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="eg-btn delete--btn"><i class="bi bi-trash"></i></button>
-                                        <button class="eg-btn account--btn"><i class="far fa-user"></i></button>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <div class="card-action d-flex justify-content-between">
+                                        <div class="d-flex flex-row justify-content-md-center justify-content-end align-items-center gap-2">
+                                            <button class="eg-btn add--btn"><i class="bi bi-pencil-square"></i></button>
+                                            <button class="eg-btn delete--btn" onclick="confirmDelete('<%= user._id %>')"><i class="bi bi-trash"></i></button>                                            <button class="eg-btn account--btn"><i class="far fa-user"></i></button>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class=" col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                            <div class="eg-profile-card text-center">
-                                <div class="profile-img">
-                                    <img class="rounded-circle" src="assets/img/innerpage/profile-img.png" alt="">
-                                    <button class="eg-btn red-light--btn">Deactive</button>
-                                </div>
-                                <div class="profile-bio">
-                                    <h4>Magnus Thornwood</h4>
-                                    <h6>Marchant ID: 120004</h6>
-                                </div>
-                                <div class="card-action d-flex justify-content-between">
-                                    <div class="d-flex flex-row justify-content-md-center justify-content-end align-items-center gap-2">
-                                        <button class="eg-btn add--btn"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="eg-btn delete--btn"><i class="bi bi-trash"></i></button>
-                                        <button class="eg-btn account--btn"><i class="far fa-user"></i></button>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                            <div class="eg-profile-card text-center">
-                                <div class="profile-img">
-                                    <img class="rounded-circle" src="assets/img/innerpage/profile-img.png" alt="">
-                                    <button class="eg-btn green-light--btn">Active</button>
-                                </div>
-                                <div class="profile-bio">
-                                    <h4>Amara Sterling</h4>
-                                    <h6>Marchant ID: 120005</h6>
-                                </div>
-                                <div class="card-action d-flex justify-content-between">
-                                    <div class="d-flex flex-row justify-content-md-center justify-content-end align-items-center gap-2">
-                                        <button class="eg-btn add--btn"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="eg-btn delete--btn"><i class="bi bi-trash"></i></button>
-                                        <button class="eg-btn account--btn"><i class="far fa-user"></i></button>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                            <div class="eg-profile-card text-center">
-                                <div class="profile-img">
-                                    <img class="rounded-circle" src="assets/img/innerpage/profile-img.png" alt="">
-                                    <button class="eg-btn red-light--btn">Deactive</button>
-                                </div>
-                                <div class="profile-bio">
-                                    <h4>Asher Wilde</h4>
-                                    <h6>Marchant ID: 120006</h6>
-                                </div>
-                                <div class="card-action d-flex justify-content-between">
-                                    <div class="d-flex flex-row justify-content-md-center justify-content-end align-items-center gap-2">
-                                        <button class="eg-btn add--btn"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="eg-btn delete--btn"><i class="bi bi-trash"></i></button>
-                                        <button class="eg-btn account--btn"><i class="far fa-user"></i></button>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                            <div class="eg-profile-card text-center">
-                                <div class="profile-img">
-                                    <img class="rounded-circle" src="assets/img/innerpage/profile-img.png" alt="">
-                                    <button class="eg-btn green-light--btn">Active</button>
-                                </div>
-                                <div class="profile-bio">
-                                    <h4>Luna Everhart</h4>
-                                    <h6>Marchant ID: 120007</h6>
-                                </div>
-                                <div class="card-action d-flex justify-content-between">
-                                    <div class="d-flex flex-row justify-content-md-center justify-content-end align-items-center gap-2">
-                                        <button class="eg-btn add--btn"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="eg-btn delete--btn"><i class="bi bi-trash"></i></button>
-                                        <button class="eg-btn account--btn"><i class="far fa-user"></i></button>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                            <div class="eg-profile-card text-center">
-                                <div class="profile-img">
-                                    <img class="rounded-circle" src="assets/img/innerpage/profile-img.png" alt="">
-                                    <button class="eg-btn green-light--btn">Active</button>
-                                </div>
-                                <div class="profile-bio">
-                                    <h4>Orion Storm</h4>
-                                    <h6>Marchant ID: 120008</h6>
-                                </div>
-                                <div class="card-action d-flex justify-content-between">
-                                    <div class="d-flex flex-row justify-content-md-center justify-content-end align-items-center gap-2">
-                                        <button class="eg-btn add--btn"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="eg-btn delete--btn"><i class="bi bi-trash"></i></button>
-                                        <button class="eg-btn account--btn"><i class="far fa-user"></i></button>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <form id="deleteForm-<%= user._id %>" action="/admin/delete-user/<%= user._id %>" method="POST" style="display: none;">
+                            </form>
+                        <% }) %>
+                        
+                        
                     </div>
                 </div>
             </div>
         </div>
+
+        <script>
+            function confirmDelete(userId) {
+                // Show a confirmation dialog
+                if (confirm('Are you sure you want to delete this user?')) {
+                    // If confirmed, submit the form to delete the user
+                    document.getElementById('deleteForm-' + userId).submit();
+                }
+            }
+        </script>
+        
         <%-include('../partials/adminFooter')%>

@@ -6,6 +6,7 @@ const Booking = require('../models/tourBook')
 const Razorpay = require('razorpay');
 const Visa = require('../models/visa');
 const Activity = require('../models/activity')
+const Transport = require('../models/transport')
 const razorpay = new Razorpay({
     key_id: 'YOUR_RAZORPAY_KEY',
     key_secret: 'YOUR_RAZORPAY_SECRET'
@@ -36,7 +37,8 @@ const loadHotels = async(req,res,next)=>{
 }
 const loadTransports =async(req,res,next)=>{
     try {
-        res.render('transports')
+        const transports = await Transport.find()
+        res.render('transports',{transports})
     } catch (error) {
         console.log(error.message);
         
@@ -120,7 +122,9 @@ const loadHotelDetails = async(req,res,next)=>{
 }
 const loadTransportDetails = async(req,res,next)=>{
     try {
-        res.render('transport-details')
+        const transport = await Transport.findById(req.params.id)
+        const user = await User.findById(req.session.user_id);
+        res.render('transport-details',{transport,user})
     } catch (error) {
         console.log(error.message);
         
@@ -167,7 +171,7 @@ const signup = async (req, res) => {
         const newUser = new User({ username, email, mobile, password: hashedPassword });
         
         await newUser.save();
-        res.redirect('/login'); // Redirect to login page after successful registration
+        res.redirect('/'); // Redirect to login page after successful registration
     } catch (error) {
         console.error(error);
         res.status(500).send('Error registering user');
@@ -187,7 +191,7 @@ const login = async (req, res,next) => {
         }
         req.session.user_id = user._id;
         next();
-        res.redirect('/dashboard'); // Redirect to dashbord page after successful login
+        res.redirect('/'); 
     } catch (error) {
         console.error(error);
         res.status(500).send('Error logging in');

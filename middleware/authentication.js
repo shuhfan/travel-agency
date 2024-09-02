@@ -14,7 +14,7 @@ const isLogin = async (req,res,next)=>{
 const isLogout = async (req,res,next)=>{
     try{
         if(req.session.user_id){
-            res.redirect('/dashboard')
+            res.redirect('/')
         }
         next()
     }

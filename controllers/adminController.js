@@ -155,14 +155,39 @@ const loadBookingList = async(req,res,next)=>{
         
     }
 }
-const loadCustomerList = async(req,res,next)=>{
+const loadCustomerList = async (req, res, next) => {
     try {
-        res.render('customerList')
+        // Get the search query from the request
+        const searchQuery = req.query.search;
+
+        let users;
+        if (searchQuery) {
+            // Create a search condition array
+            const searchConditions = [
+                { username: { $regex: searchQuery, $options: 'i' } },  // Case-insensitive search for username
+                { email: { $regex: searchQuery, $options: 'i' } },     // Case-insensitive search for email
+            ];
+
+            // If the search query is a number, add a search condition for the mobile field
+            if (!isNaN(searchQuery)) {
+                searchConditions.push({ mobile: searchQuery }); // Exact match for mobile numbers
+            }
+
+            // Search users based on the search conditions
+            users = await User.find({ $or: searchConditions });
+        } else {
+            // If no search query, display all users
+            users = await User.find();
+        }
+
+        // Render the customer list page with the filtered users
+        res.render('customerList', { users });
     } catch (error) {
         console.log(error.message);
-        
+        res.status(500).send('Error loading customer list');
     }
-}
+};
+
 const loadSettings = async(req,res,next)=>{
     try {
         res.render('settings')
@@ -307,12 +332,22 @@ const addTransport = async (req, res) => {
 
     try {
         await newTransport.save();
-        res.redirect('/admin/transport-upload'); 
+        res.redirect('/admin/transports-upload'); 
     } catch (error) {
         console.error(error);
         res.status(500).send('Error saving transport data');
     }
 }
+const deleteUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        await User.findByIdAndDelete(userId);  // Delete the user from the database
+        res.redirect('/admin/customer-list');  // Redirect to the customer list after deletion
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send('Error deleting user');
+    }
+};
 
 module.exports = {
     login,
@@ -336,5 +371,6 @@ module.exports = {
     addHotel,
     addVisa,
     addActivity,
-    addTransport
+    addTransport,
+    deleteUser,
 }

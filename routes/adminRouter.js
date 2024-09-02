@@ -35,13 +35,14 @@ admin_router.get('/customer-list',auth.isLogin,adminController.loadCustomerList)
 admin_router.get('/settings',auth.isLogin,adminController.loadSettings)
 admin_router.get('/logout',auth.isLogin,adminController.logout)
 
+
 admin_router.post('/',adminController.login)
 admin_router.post('/tour-upload', upload.array('images', 12), adminController.addTour);
 admin_router.post('/hotel-upload', upload.array('images', 12), adminController.addHotel);
 admin_router.post('/visa-upload', upload.array('images', 12), adminController.addVisa);
 admin_router.post('/activity-upload', upload.array('images', 12), adminController.addActivity);
-admin_router.post('/transport-upload', upload.array('images', 12), adminController.addTransport);
-
+admin_router.post('/transports-upload', upload.array('images', 12), adminController.addTransport);
+admin_router.post('/delete-user/:id', auth.isLogin, adminController.deleteUser);
 
 
 
