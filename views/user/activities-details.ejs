@@ -100,8 +100,7 @@
                 </div>
                 <div class="col-xl-4">
                     <div class="booking-form-wrap mb-30">
-                        <h4>Book Your Room</h4>
-                        <p>Reserve your ideal Room early for a hassle-free trip; secure comfort and convenience!</p>
+                        <h4>Book Your activity</h4>
                         <div class="nav nav-pills mb-40" role="tablist">
                             <button class="nav-link active" id="v-pills-contact-tab" data-bs-toggle="pill"
                                 data-bs-target="#v-pills-contact" type="button" role="tab"
@@ -114,30 +113,32 @@
                             <div class="tab-pane fade show active" id="v-pills-contact" role="tabpanel"
                                 aria-labelledby="v-pills-contact-tab">
                                 <div class="sidebar-booking-form">
-                                    <form id="inquiryForm">
-                                        <div class="form-inner mb-20">
-                                          <label>Select Your Start Date:</label>
-                                          <input type="date" id="startDate" placeholder="Select Start Date" required>
-                                        </div>
-                                        <div class="form-inner mb-20">
-                                          <label>Select Your End Date:</label>
-                                          <input type="date" id="endDate" placeholder="Select End Date" required>
-                                        </div>
-                                        <div class="form-inner mb-20">
-                                          <label>No. of People:</label>
-                                          <input type="number" id="peopleCount" placeholder="Enter number of people" required>
-                                        </div>
-                                        <input type="hidden" id="tourName" value="<%= activity.title %>">
+
+                                    <form id="inquiryForm" action="/activity-contact" method="post">
                                         
-                                        <input type="hidden" id="tourEmail" value="<%= user.username %>">
-                                        <input type="hidden" id="tourMobile" value="<%= user.email %>">
-                                        <div class="form-inner">
-                                          <a class="btn btn-success" onclick="formSubmit()" href="#thankYouMessage">Submit</a>
+                                        <input type="hidden" id="name" name="name" value="<%= user.username %>">
+                                        <input type="hidden" id="contact-number" name="contactNumber" value="<%= user.mobile %>">
+
+                                        <div class="form-inner mb-20">
+                                            <label for="whatsapp-number">WhatsApp Number:</label>
+                                            <input type="tel" id="whatsapp-number" name="whatsappNumber" placeholder="Enter your WhatsApp number" required>
                                         </div>
-                                      </form>
-                                      <div id="thankYouMessage" style="display: none;">
-                                        <p class='text-success'>Thank you for your inquiry! We will get back to you shortly.</p>
-                                      </div>
+
+                                        <input type="hidden" id="activityName" name="activityName" value="<%= activity.activityName %>">
+                                        <input type="hidden" id="activityLocation" name="activityLocation" value="<%= activity.location %>">
+
+
+                                        <input type="hidden" id="userEmail" name="userEmail" value="<%= user.email %>">
+
+                                        <div id="thankYouMessage" style="display: none;">
+                                            <p class="text-success">Thank you for your inquiry! We will get back to you
+                                                shortly.</p>
+                                        </div>
+
+                                        <div class="form-inner">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </form>
                                       
                                 </div>
                             </div>
@@ -153,71 +154,20 @@
         </div>
     </div>
 
-  <!-- <div class="activitis-page pt-120 mb-120">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="single-activitis">
-                    <div class="activitis-content">
-                        <div class="eg-tag2">
-                            <span>Nature Tours</span>
-                        </div>
-                        <h2>Trailblazing Through Nature: Explorations and Activities</h2>
-                        <p>Discover nature's wonders through guided hikes, wildlife safaris, and hands-on workshops. Immerse in eco-tours, birdwatching, and outdoor education—connecting with the wilderness for an enriching experience amidst stunning landscapes.</p>
-                        <ul>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9">
-                                    <circle cx="4.5" cy="4.5" r="4.5"></circle>
-                                </svg>
-                                Hiking and Trekking
-                            </li>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9">
-                                    <circle cx="4.5" cy="4.5" r="4.5"></circle>
-                                </svg>
-                                White Water Rafting
-                            </li>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9">
-                                    <circle cx="4.5" cy="4.5" r="4.5"></circle>
-                                </svg>
-                                Mountain Climbing
-                            </li>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9">
-                                    <circle cx="4.5" cy="4.5" r="4.5"></circle>
-                                </svg>
-                                Kayaking and Canoeing
-                            </li>
-                        </ul>
-                        <div class="content-bottom-area">
-                            <a href="#" class="primary-btn1">Check Availability</a>
-                            <a href="https://www.youtube.com/watch?v=MLpWrANjFbI&amp;ab_channel=eidelchteinadvogados" class="video-area video4">
-                                <div class="icon">
-                                    <svg class="video-circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="51px" viewBox="0 0 206 206" style="enable-background:new 0 0 206 206;" xml:space="preserve">
-                                        <circle class="circle" stroke-miterlimit="10" cx="103" cy="103" r="100"></circle>
-                                        <path class="circle-half top-half" stroke-width="4" stroke-miterlimit="10" d="M16.4,53C44,5.2,105.2-11.2,153,16.4s64.2,88.8,36.6,136.6"></path>
-                                        <path class="circle-half bottom-half" stroke-width="4" stroke-miterlimit="10" d="M189.6,153C162,200.8,100.8,217.2,53,189.6S-11.2,100.8,16.4,53"></path>
-                                    </svg>
-                                    <i class="bi bi-play"></i>
-                                </div> 
-                                <h6>Watch Adventure</h6>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="activitis-img">
-                        <div class="activitis-img1 mb-25">
-                            <img src="assets/img/home1/verticle-tab-img1.png" alt="">
-                        </div>
-                        <div class="activitis-img2">
-                            <img src="assets/img/home1/verticle-tab-img2.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div> -->
-    <!-- End Activitis section -->
+    <script>
+        document.getElementById('inquiryForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+
+            // Show thank you message
+            document.getElementById('thankYouMessage').style.display = 'block';
+
+            setTimeout(() => {
+                this.submit(); // Use `this.submit()` to submit the form programmatically
+            }, 4000);
+
+
+        });
+    </script>
     
     <%-include('../partials/userFooter')%>

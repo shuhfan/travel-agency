@@ -102,31 +102,50 @@
                             <div class="tab-pane fade show active" id="v-pills-contact" role="tabpanel"
                                 aria-labelledby="v-pills-contact-tab">
                                 <div class="sidebar-booking-form">
-                                    <form id="inquiryForm">
-                                        <div class="form-inner mb-20">
-                                          <label>Select Your Start Date:</label>
-                                          <input type="date" id="startDate" placeholder="Select Start Date" required>
-                                        </div>
-                                        <div class="form-inner mb-20">
-                                          <label>Select Your End Date:</label>
-                                          <input type="date" id="endDate" placeholder="Select End Date" required>
-                                        </div>
-                                        <div class="form-inner mb-20">
-                                          <label>No. of People:</label>
-                                          <input type="number" id="peopleCount" placeholder="Enter number of people" required>
-                                        </div>
-                                        <input type="hidden" id="tourName" value="<%= tour.title %>">
+
+                                    <form id="inquiryForm" action="/tour-contact" method="post">
                                         
-                                        <input type="hidden" id="tourEmail" value="<%= user.username %>">
-                                        <input type="hidden" id="tourMobile" value="<%= user.email %>">
-                                        <div class="form-inner">
-                                          <a class="btn btn-success" onclick="formSubmit()" href="#thankYouMessage">Submit</a>
+                                        <input type="hidden" id="name" name="name" value="<%= user.username %>">
+                                        <input type="hidden" id="contact-number" name="contactNumber" value="<%= user.mobile %>">
+
+                                        <div class="form-inner mb-20">
+                                            <label for="whatsapp-number">Whatsapp Number:</label>
+                                            <input type="number" id="whatsapp-number" name="whatsappNumber"
+                                                placeholder="Enter your WhatsApp number" required>
                                         </div>
-                                      </form>
-                                      <div id="thankYouMessage" style="display: none;">
-                                        <p class='text-success'>Thank you for your inquiry! We will get back to you shortly.</p>
-                                      </div>
-                                      
+
+                                        <div class="form-inner mb-20">
+                                            <label for="travelling-date">Travelling Date:</label>
+                                            <input type="date" id="travelling-date" name="travellingDate" required>
+                                        </div>
+
+                                        <div class="form-inner mb-20">
+                                            <label for="adult">Adult:</label>
+                                            <input type="number" id="adult" name="adult" min="0"
+                                                placeholder="Number of adults" required>
+                                        </div>
+
+                                        <div class="form-inner mb-20">
+                                            <label for="child">Child:</label>
+                                            <input type="number" id="child" name="child" min="0"
+                                                placeholder="Number of children" required>
+                                        </div>
+
+                                        <input type="hidden" id="tourName" name="tourName" value="<%= tour.title %>">
+
+                                        <input type="hidden" id="tourMobile" name="userEmail" value="<%= user.email %>">
+                                        
+                                        <div id="thankYouMessage" style="display: none;">
+                                            <p class="text-success">Thank you for your inquiry! We will get back to you
+                                                shortly.</p>
+                                        </div>
+                                        <div class="form-inner">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </form>
+
+
+
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="v-pills-booking" role="tabpanel"
@@ -201,8 +220,8 @@
     </div>
     <!-- End Room Details section -->
     <!-- Include Flatpickr CSS and JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
 
     <!-- <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -344,37 +363,19 @@
     </script> -->
 
     <script>
-        function formSubmit (){
-// Get form values
-var startDate = document.getElementById('startDate').value;
-  var endDate = document.getElementById('endDate').value;
-  var peopleCount = document.getElementById('peopleCount').value;
-  var tourName = document.getElementById('tourName').value;
-  var tourEmail = document.getElementById('tourEmail').value;
-  var tourMobile = document.getElementById('tourMobile').value;
+        document.getElementById('inquiryForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
 
-  // Prepare the email params
-  var templateParams = {
-    start_date: startDate,
-    end_date: endDate,
-    people_count: peopleCount,
-    tour_name: tourName,
-    tour_email: tourEmail,
-    tour_mobile: tourMobile
-  };
-   var serviceId = 'service_tw4wxir'
-   var templateId = 'template_pxk2uzh'
 
-    emailjs.send(serviceId,templateId,templateParams).then(
-        (res)=>{
-            console.log(res);
-            document.getElementById('thankYouMessage').style.display = 'block' 
-        }
-    ).catch(err=>{console.log(err);})
-        }
-        
-    
-  
+            // Show thank you message
+            document.getElementById('thankYouMessage').style.display = 'block';
 
+            setTimeout(() => {
+                this.submit(); // Use `this.submit()` to submit the form programmatically
+            }, 4000);
+
+
+        });
     </script>
+
     <%-include('../partials/userFooter')%>

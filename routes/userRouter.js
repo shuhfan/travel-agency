@@ -28,15 +28,21 @@ user_router.get('/signup',userController.loadSignup)
 user_router.get('/package-details/:id',auth.isLogin,userController.loadPackageDetails)
 user_router.get('/hotel-details/:id',auth.isLogin,userController.loadHotelDetails)
 user_router.get('/transport-details/:id',auth.isLogin,userController.loadTransportDetails)
-user_router.get('/activities-details/:id',auth.isLogin,auth.isLogin,userController.loadActivitiesDetails)
+user_router.get('/activities-details/:id',auth.isLogin,userController.loadActivitiesDetails)
 user_router.get('/visa-details/:id',auth.isLogin,userController.loadVisaDetails)
 user_router.get('/dashboard',auth.isLogin,userController.loadDashboard)
 user_router.get('/logout',auth.isLogin,userController.logout)
 user_router.get('/privacy-policy',userController.loadPrivacyPolicy)
 user_router.get('/terms-condition',userController.loadTermsCondition)
 
+
 user_router.post('/signup',userController.signup)
 user_router.post('/login',userController.login)
 
-user_router.post('/create_order',userController.createRzpOrder) 
+user_router.post('/create_order',userController.createRzpOrder)
+user_router.post('/tour-contact',auth.isLogin,userController.tourContact)
+user_router.post('/hotel-contact',auth.isLogin,userController.hotelContact)
+user_router.post('/transport-contact',auth.isLogin,userController.transportContact)
+user_router.post('/activity-contact',auth.isLogin,userController.activityContact)
+user_router.post('/visa-contact',auth.isLogin,userController.visaContact)
 module.exports = user_router

@@ -63,13 +63,6 @@
                     </div>
                     <p><%- hotel.description.replace(/\n/g, '<br>' ) %></p>
 
-                    
-                    
-
-                    
-
-                    
-
                     <h4>Facilities</h4>
 <ul class="extra-service mb-20">
     <% hotel.facilities.forEach(facility => { %>
@@ -98,30 +91,45 @@
                             <div class="tab-pane fade show active" id="v-pills-contact" role="tabpanel"
                                 aria-labelledby="v-pills-contact-tab">
                                 <div class="sidebar-booking-form">
-                                    <form id="inquiryForm">
-                                        <div class="form-inner mb-20">
-                                          <label>Select Your Start Date:</label>
-                                          <input type="date" id="startDate" placeholder="Select Start Date" required>
-                                        </div>
-                                        <div class="form-inner mb-20">
-                                          <label>Select Your End Date:</label>
-                                          <input type="date" id="endDate" placeholder="Select End Date" required>
-                                        </div>
-                                        <div class="form-inner mb-20">
-                                          <label>No. of People:</label>
-                                          <input type="number" id="peopleCount" placeholder="Enter number of people" required>
-                                        </div>
-                                        <input type="hidden" id="tourName" value="<%= hotel.title %>">
+
+                                    <form id="inquiryForm" action="/hotel-contact" method="post">
                                         
-                                        <input type="hidden" id="tourEmail" value="<%= user.username %>">
-                                        <input type="hidden" id="tourMobile" value="<%= user.email %>">
-                                        <div class="form-inner">
-                                          <a class="btn btn-success" onclick="formSubmit()" href="#thankYouMessage">Submit</a>
+                                        <input type="hidden" id="name" name="name" value="<%= user.username %>">
+                                        <input type="hidden" id="contact-number" name="contactNumber" value="<%= user.mobile %>">
+
+                                        <div class="form-inner mb-20">
+                                            <label for="whatsapp-number">WhatsApp Number:</label>
+                                            <input type="tel" id="whatsapp-number" name="whatsappNumber" placeholder="Enter your WhatsApp number" required>
                                         </div>
-                                      </form>
-                                      <div id="thankYouMessage" style="display: none;">
-                                        <p class='text-success'>Thank you for your inquiry! We will get back to you shortly.</p>
-                                      </div>
+                                    
+                                        <div class="form-inner mb-20">
+                                            <label for="check-in-date">Check-in Date:</label>
+                                            <input type="date" id="check-in-date" name="checkInDate" required>
+                                        </div>
+                                    
+                                        <div class="form-inner mb-20">
+                                            <label for="check-out-date">Check-out Date:</label>
+                                            <input type="date" id="check-out-date" name="checkOutDate" required>
+                                        </div>
+                                    
+                                        <div class="form-inner mb-20">
+                                            <label for="members">No.of Peoples:</label>
+                                            <input type="number" id="members" name="members" min="1" placeholder="Enter number of members" required>
+                                        </div>
+
+                                        <input type="hidden" id="hotelName" name="hotelName" value="<%= hotel.title %>">
+
+                                        <input type="hidden" id="userEmail" name="userEmail" value="<%= user.email %>">
+
+                                        <div id="thankYouMessage" style="display: none;">
+                                            <p class="text-success">Thank you for your inquiry! We will get back to you
+                                                shortly.</p>
+                                        </div>
+                                        <div class="form-inner">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </form>
+
                                       
                                 </div>
                             </div>
@@ -138,37 +146,18 @@
     </div>
     <!-- End Room Details section -->
     <script>
-        function formSubmit (){
-// Get form values
-var startDate = document.getElementById('startDate').value;
-  var endDate = document.getElementById('endDate').value;
-  var peopleCount = document.getElementById('peopleCount').value;
-  var tourName = document.getElementById('tourName').value;
-  var tourEmail = document.getElementById('tourEmail').value;
-  var tourMobile = document.getElementById('tourMobile').value;
+        document.getElementById('inquiryForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
 
-  // Prepare the email params
-  var templateParams = {
-    start_date: startDate,
-    end_date: endDate,
-    people_count: peopleCount,
-    tour_name: tourName,
-    tour_email: tourEmail,
-    tour_mobile: tourMobile
-  };
-   var serviceId = 'service_tw4wxir'
-   var templateId = 'template_pxk2uzh'
 
-    emailjs.send(serviceId,templateId,templateParams).then(
-        (res)=>{
-            console.log(res);
-            document.getElementById('thankYouMessage').style.display = 'block' 
-        }
-    ).catch(err=>{console.log(err);})
-        }
-        
-    
-  
+            // Show thank you message
+            document.getElementById('thankYouMessage').style.display = 'block';
 
+            setTimeout(() => {
+                this.submit(); // Use `this.submit()` to submit the form programmatically
+            }, 4000);
+
+
+        });
     </script>
     <%-include('../partials/userFooter')%>

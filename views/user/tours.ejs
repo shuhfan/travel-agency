@@ -17,6 +17,22 @@
     <!-- Start Package Grid section -->
     <div class="package-grid-section pt-120 mb-120">
         <div class="container">
+            <div class="col-xl-4 order-lg-1 order-1">
+                <div class="sidebar-area">
+                    <div class="single-widget mb-30">
+                        <h5 class="widget-title">Search Here</h5>
+                        <form action="/tours" method="GET">
+                            <div class="search-box">
+                                <input type="text" name="search" placeholder="Search Here">
+                                <button type="submit"><i class="bx bx-search"></i></button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                    
+                    
+                </div>
+            </div>
             <div class="row gy-5 mb-70">
                 <% if (tours.length === 0) { %>
                     <p>No tours available at the moment.</p>

@@ -8,7 +8,7 @@
                     <div class="banner-content">
                         <h1>Activitis</h1>
                         <ul class="breadcrumb-list">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li>Activitis</li>
                         </ul>
                     </div>
@@ -21,7 +21,27 @@
     <!-- Start Activitis section -->
     <div class="activites-pages pt-120 mb-120">
         <div class="container">
+            <div class="col-xl-4 order-lg-1 order-1">
+                <div class="sidebar-area">
+                    <div class="single-widget mb-30">
+                        <h5 class="widget-title">Search Here</h5>
+                        <form action="/activities" method="GET">
+                            <div class="search-box">
+                                <input type="text" name="search" placeholder="Search Here">
+                                <button type="submit"><i class="bx bx-search"></i></button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
             <div class="row">
+                <% if (activities.length === 0) { %>
+                    <p>No Activities available at the moment.</p>
+                <% }else { %>
                 <% activities.forEach(activity => { %>
                     <div class="col-xl-3 col-lg-4 col-sm-6">
                         <div class="activity-card">
@@ -40,6 +60,7 @@
                         </div>
                     </div>
                 <% }) %>
+                <% } %>
             </div>
             
         </div>

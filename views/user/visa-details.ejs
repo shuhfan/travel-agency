@@ -73,59 +73,79 @@
                     
                 </div>
                 <div class="col-lg-4">
-                    <div class="visa-sidebar mb-30">
-                        
-                        <div class="inquery-form">
-                            <div class="form-title">
-                                <h4>Inquiry Form</h4>
-                                <p>Complete form for complaints or service inquiries; expect prompt response via phone/email.</p>
+                    <div class="transport-sidebar">
+                        <div class="booking-form-wrap">
+                            <h4>Reserve Your Visa</h4>
+                            <div class="nav nav-pills mb-40" role="tablist">
+                                <button class="nav-link active" id="v-pills-contact-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-contact" type="button" role="tab"
+                                    aria-controls="v-pills-contact" aria-selected="true">Inquiry Form</button>
+                                <button class="nav-link" id="v-pills-booking-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-booking" type="button" role="tab"
+                                    aria-controls="v-pills-booking" aria-selected="false">Online Booking</button>
                             </div>
-                            <form>
+                            <div class="tab-content" id="v-pills-tabContent2">
+                                <div class="tab-pane fade show active" id="v-pills-contact" role="tabpanel"
+                                    aria-labelledby="v-pills-contact-tab">
+                                    <div class="sidebar-booking-form">
+                            <form id="inquiryForm" action="/visa-contact" method="post">
+                                        
+                                <input type="hidden" id="name" name="name" value="<%= user.username %>">
+                                <input type="hidden" id="contact-number" name="contactNumber" value="<%= user.mobile %>">
+
                                 <div class="form-inner mb-20">
-                                    <label>Full Name <span>*</span></label>
-                                    <input type="text" placeholder="Enter your full name">
+                                    <label for="whatsapp-number">WhatsApp Number:</label>
+                                    <input type="tel" id="whatsapp-number" name="whatsappNumber" placeholder="Enter your WhatsApp number" required>
                                 </div>
+
                                 <div class="form-inner mb-20">
-                                    <label>Email Address <span>*</span></label>
-                                    <input type="email" placeholder="Enter your email address">
+                                    <label for="visa-validity">Visa Validity:</label>
+                                    <input type="text" id="visa-validity" name="visaValidity" placeholder="Enter your visa validity" required>
                                 </div>
-                                <div class="form-inner mb-20">
-                                    <label>Phone Number  <span>*</span></label>
-                                    <input type="text" placeholder="Enter your phone number">
+
+                                <input type="hidden" id="visaLocation" name="visaLocation" value="<%= visa.location %>">
+
+
+                                <input type="hidden" id="userEmail" name="userEmail" value="<%= user.email %>">
+
+                                <div id="thankYouMessage" style="display: none;">
+                                    <p class="text-success">Thank you for your inquiry! We will get back to you
+                                        shortly.</p>
                                 </div>
-                                <div class="form-inner mb-70">
-                                    <label>Visa Type <span>*</span></label>
-                                    <select>
-                                        <option value="1">Tourist</option>
-                                        <option value="2">Business visa</option>
-                                        <option value="3">Student visa</option>
-                                    </select>
-                                </div>
-                                <div class="form-inner mb-70">
-                                    <label>Country <span>*</span></label>
-                                    <select>
-                                        <option value="1">Australia</option>
-                                        <option value="2">Brazil</option>
-                                        <option value="3">Bangladesh</option>
-                                        <option value="3">France</option>
-                                        <option value="3">Spain</option>
-                                    </select>
-                                </div>
-                                <div class="form-inner mb-30">
-                                    <label>Write Your Massage <span>*</span></label>
-                                    <textarea placeholder="Write your quiry"></textarea>
-                                </div>
+
                                 <div class="form-inner">
-                                    <button type="submit" class="primary-btn1 two">Submit Now</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    
+                    <div class="tab-pane fade" id="v-pills-booking" role="tabpanel"
+                        aria-labelledby="v-pills-booking-tab">
+                        
+                        <p>Online Booking available soon...</p>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
     <!-- End visa Details section -->
-    
+    <script>
+        document.getElementById('inquiryForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+
+            // Show thank you message
+            document.getElementById('thankYouMessage').style.display = 'block';
+
+            setTimeout(() => {
+                this.submit(); // Use `this.submit()` to submit the form programmatically
+            }, 4000);
+
+
+        });
+    </script>
     <%-include('../partials/userFooter')%>

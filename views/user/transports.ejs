@@ -25,18 +25,21 @@
                     <div class="sidebar-area">
                         <div class="single-widget mb-30">
                             <h5 class="widget-title">Search Here</h5>
-                            <form>
+                            <form action="/transports" method="GET">
                                 <div class="search-box">
-                                    <input type="text" placeholder="Search Here">
+                                    <input type="text" name="search" placeholder="Search Here">
                                     <button type="submit"><i class="bx bx-search"></i></button>
                                 </div>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-12 order-lg-2 order-1">
                     <div class="row g-4 mb-70">
-                        <!-- Loop through each transport -->
+                        <% if (transports.length === 0) { %>
+                            <p>No Transports available at the moment.</p>
+                        <% }else { %>
                         <% transports.forEach(function(transport) { %>
                             <div class="col-md-6">
                                 <div class="transport-card">
@@ -61,6 +64,7 @@
                                 </div>
                             </div>
                         <% }); %>
+                        <% } %>
                     </div>
                 </div>
             </div>
